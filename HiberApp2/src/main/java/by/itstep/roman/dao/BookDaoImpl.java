@@ -23,18 +23,15 @@ public class BookDaoImpl implements BookDao{
 	
 	@Autowired
 	   private SessionFactory sessionFactory;
-		@Override
-	   public int save(Book book) {
+		public int save(Book book) {
 	      sessionFactory.getCurrentSession().save(book);
 	      return book.getBookId();
 	   }
 
-		@Override
-	   public Book get(int id) {
+		public Book get(int id) {
 	      return sessionFactory.getCurrentSession().get(Book.class,id);
 	   }
-		@Override
-	   public List<Book> list() {
+		public List<Book> list() {
 	      Session session = sessionFactory.getCurrentSession();
 	      CriteriaBuilder cb = session.getCriteriaBuilder();
 	      CriteriaQuery<Book> cq = cb.createQuery(Book.class);
@@ -43,8 +40,7 @@ public class BookDaoImpl implements BookDao{
 	      Query<Book> query = session.createQuery(cq);
 	      return query.getResultList();
 	   }
-		@Override
-	   public void update(int id, Book book) {
+		public void update(int id, Book book) {
 	      Session session = sessionFactory.getCurrentSession();
 	      Book book2 = session.byId(Book.class).load(id);
 	      book2.setTitle(book.getTitle());
@@ -54,8 +50,7 @@ public class BookDaoImpl implements BookDao{
 	      session.flush();
 	   }
 
-		@Override
-	   public void delete(int id) {
+		public void delete(int id) {
 	      Session session = sessionFactory.getCurrentSession();
 	      Book book = session.byId(Book.class).load(id);
 	      session.delete(book);

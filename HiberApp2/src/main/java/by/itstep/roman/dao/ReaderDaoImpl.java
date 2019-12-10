@@ -1,4 +1,4 @@
-package org.itstep.dao;
+package by.itstep.roman.dao;
 
 import java.util.List;
 
@@ -9,25 +9,24 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.itstep.model.Reader;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
+import by.itstep.roman.model.Reader;
 
 public class ReaderDaoImpl implements ReaderDao {
 	@Autowired
 	   private SessionFactory sessionFactory;
 
-	@Override
 	public int save(Reader reader) {
 		sessionFactory.getCurrentSession().save(reader);
 	      return reader.getReaderId();
 	}
 
-	@Override
 	public Reader get(int id) {
 		return sessionFactory.getCurrentSession().get(Reader.class,id);
 	}
 
-	@Override
 	public List<Reader> list() {
 		Session session = sessionFactory.getCurrentSession();
 	      CriteriaBuilder cb = session.getCriteriaBuilder();
@@ -38,7 +37,6 @@ public class ReaderDaoImpl implements ReaderDao {
 	      return query.getResultList();
 	}
 
-	@Override
 	public void update(int id, Reader reader) {
 		Session session = sessionFactory.getCurrentSession();
 	      Reader reader2 = session.byId(Reader.class).load(id);
@@ -49,7 +47,6 @@ public class ReaderDaoImpl implements ReaderDao {
 		
 	}
 
-	@Override
 	public void delete(int id) {
 		Session session = sessionFactory.getCurrentSession();
 	      Reader reader = session.byId(Reader.class).load(id);

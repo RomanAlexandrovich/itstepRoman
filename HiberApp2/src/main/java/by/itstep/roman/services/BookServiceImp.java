@@ -17,28 +17,23 @@ import by.itstep.roman.model.Book;
 public class BookServiceImp implements BookService {
 	 @Autowired
 	   private BookDao bookDao;
-	@Override
 	public int save(Book book) {
 		return bookDao.save(book);
 	}
 
-	@Override
 	public Book get(int id) {
 		return bookDao.get(id);
 	}
 
-	@Override
 	public List<Book> list() {
 		return bookDao.list();
 	}
 	@Transactional
-	@Override
 	public void update(int id, Book book) {
 		bookDao.update(id, book);
 		
 	}
 	@Transactional
-	@Override
 	public void delete(int id) {
 		bookDao.delete(id);
 		
