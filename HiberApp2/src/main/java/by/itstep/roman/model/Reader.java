@@ -1,4 +1,4 @@
-package org.itstep.model;
+package by.itstep.roman.model;
 
 import java.util.ArrayList;
 import java.util.List;
