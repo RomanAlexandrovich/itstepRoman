@@ -1,12 +1,14 @@
-package org.itstep.service;
+package by.itstep.roman.services;
 
 import java.util.List;
 
-import org.itstep.dao.ReaderDao;
-import org.itstep.model.Reader;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import by.itstep.roman.dao.ReaderDao;
+import by.itstep.roman.model.Reader;
 
 @Service
 @Transactional(readOnly = true)

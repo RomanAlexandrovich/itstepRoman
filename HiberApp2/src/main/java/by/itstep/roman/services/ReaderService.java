@@ -1,8 +1,10 @@
-package org.itstep.service;
+package by.itstep.roman.services;
 
 import java.util.List;
 
-import org.itstep.model.Reader;
+import by.itstep.roman.model.Reader;
+
+
 
 public interface ReaderService {
 	int save(Reader reader);

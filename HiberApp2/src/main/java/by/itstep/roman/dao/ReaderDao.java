@@ -1,8 +1,10 @@
-package org.itstep.dao;
+package by.itstep.roman.dao;
 
 import java.util.List;
 
-import org.itstep.model.Reader;
+import by.itstep.roman.model.Reader;
+
+
 
 
 public interface ReaderDao {

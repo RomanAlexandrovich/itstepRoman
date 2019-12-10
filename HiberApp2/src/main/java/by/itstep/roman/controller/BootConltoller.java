@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import by.itstep.roman.model.Book;
+import by.itstep.roman.model.Reader;
+import by.itstep.roman.services.BookService;
+import by.itstep.roman.services.ReaderService;
+
 @RestController //Это что???
 public class BootConltoller {
 	
