@@ -1,7 +1,8 @@
-package org.itstep.dao;
+package by.itstep.roman.dao;
 
 import java.util.List;
-import org.itstep.model.Book;
+
+import by.itstep.roman.model.Book;
 
 public interface BookDao{
 	 

@@ -1,11 +1,8 @@
-package org.itstep.controller;
+package by.itstep.roman.controller;
 
 import java.util.List;
 
-import org.itstep.model.Book;
-import org.itstep.model.Reader;
-import org.itstep.service.BookService;
-import org.itstep.service.ReaderService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

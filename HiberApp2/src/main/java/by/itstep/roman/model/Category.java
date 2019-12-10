@@ -1,4 +1,4 @@
-package org.itstep.model;
+package by.itstep.roman.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
