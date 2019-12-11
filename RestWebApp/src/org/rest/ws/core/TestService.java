@@ -9,13 +9,10 @@ import org.rest.ws.model.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
-
-
-@Path("/book")
 @RestController
 public class TestService {
 
@@ -24,12 +21,10 @@ public class TestService {
 	   private BookService bookService;
 	
 	@GET
-	@GetMapping("/{id}")
-	public ResponseEntity<Book> getMsg(@PathParam("id") int id) {
+	@GetMapping("/book/{id}")
+	public ResponseEntity<Book> getMsg(@PathVariable("id") int id) {
 
 		Book book = bookService.get(id);
-
 		 return ResponseEntity.ok().body(book);
-
 	}
 }

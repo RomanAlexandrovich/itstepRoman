@@ -25,18 +25,19 @@ public class BookController {
    private BookService bookService;
 
 
-   /*---Add new book---*/
-   @PostMapping("/book")
-   public ResponseEntity<?> save(@RequestBody Book book) {
-      long id = bookService.save(book);
-      return ResponseEntity.ok().body("New Book has been saved with ID:" + id);
-   }
+  
 
    /*---Get a book by id---*/
    @GetMapping("/book/{id}")
    public ResponseEntity<Book> get(@PathVariable("id") long id) {
       Book book = bookService.get(id);
       return ResponseEntity.ok().body(book);
+   }
+   /*---Add new book---*/
+   @PostMapping("/book")
+   public ResponseEntity<?> save(@RequestBody Book book) {
+      long id = bookService.save(book);
+      return ResponseEntity.ok().body("New Book has been saved with ID:" + id);
    }
 
    /*---get all books---*/
