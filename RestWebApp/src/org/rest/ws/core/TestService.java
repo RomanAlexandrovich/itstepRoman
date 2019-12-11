@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 
+
+
+
+@Path("/book")
 @RestController
 public class TestService {
 
@@ -21,10 +25,12 @@ public class TestService {
 	   private BookService bookService;
 	
 	@GET
-	@GetMapping("/book/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Book> getMsg(@PathVariable("id") int id) {
 
 		Book book = bookService.get(id);
+
 		 return ResponseEntity.ok().body(book);
+
 	}
 }
