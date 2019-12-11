@@ -23,7 +23,7 @@ public class BookDaoImp implements BookDao {
    @Override
    public long save(Book book) {
       sessionFactory.getCurrentSession().save(book);
-      return book.getId();
+      return book.getBookId();
    }
 
    @Override

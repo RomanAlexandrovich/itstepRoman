@@ -15,11 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.boraji.tutorial.spring.model.Book;
 import com.boraji.tutorial.spring.service.BookService;
 
+
+
+
 @RestController
 public class BookController {
 
    @Autowired
    private BookService bookService;
+
 
    /*---Add new book---*/
    @PostMapping("/book")
@@ -55,4 +59,5 @@ public class BookController {
       bookService.delete(id);
       return ResponseEntity.ok().body("Book has been deleted successfully.");
    }
+   
 }
