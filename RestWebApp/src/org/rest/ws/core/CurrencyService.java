@@ -8,9 +8,12 @@ import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.rest.util.XMLCurrencyParser;
+import org.rest.ws.model.Currency;
 
 @Path("rates")
 public class CurrencyService {
@@ -24,12 +27,20 @@ public class CurrencyService {
         StringBuilder sb = new StringBuilder(64);
         for (String code : codes) {
             sb
-            .append(code).append(" : ").append(calc(XMLCurrencyParser.getCurrency(code)))
+            .append(code).append(":").append(calc(XMLCurrencyParser.getCurrency(code)))
             .append("<br>");
         }
         return Response.status(200).entity(sb.toString()).build();
     }
-		
+		/*
+		 * -<Currency Id="170">
+		    <NumCode>036</NumCode>
+		    <CharCode>AUD</CharCode>
+		    <Scale>1</Scale>
+		    <Name>Австралийский доллар</Name>
+		    <Rate>1.4514</Rate>
+			</Currency>
+		 */
 		@GET
 		@Path("/{code}")
 		public Response getCurrency(@PathParam("code") String code) {
@@ -46,5 +57,21 @@ public class CurrencyService {
         private String calc(String nbrbRate) {
             return new Double(Double.parseDouble(nbrbRate) * 1.05).toString(); // TODO
         }
+        @GET
+		@Path("/test")
+        @Produces(MediaType.APPLICATION_XML)
+		public Currency test() {
+
+			Currency cur=new Currency();
+			cur.setId(100);
+			cur.setName("test name");
+			cur.setNumCode("SSS");
+			cur.setScale(0);
+			cur.setCharCode("111");
+			return cur;
+			 
+
+		}
 	}
+
 

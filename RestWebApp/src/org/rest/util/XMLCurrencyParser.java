@@ -41,7 +41,7 @@ public class XMLCurrencyParser
 		    Document doc = loadDocument(CURRENCY_URL);
 		    
 		    if (doc != null) {
-		      NodeList nodes = doc.getFirstChild().getChildNodes();
+		      NodeList nodes = doc.getFirstChild().getChildNodes();//загрузка п структуре документа XML 1Chaild-listCurrecn
 		      
 
 		      for (int i = 0; i < nodes.getLength(); i++) {
