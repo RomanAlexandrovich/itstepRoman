@@ -31,10 +31,22 @@ public class CurrencyService {
         return Response.status(200).entity(sb.toString()).build();
     }
     @GET
-    @Path("/alls")
+    @Path("/allJSON")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Currency> getList() {
+    public List<Currency> getListJSON() {
     return XMLCurrencyParser.getCurrencies();    
+    }
+    @GET
+    @Path("/allXML")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Currency> getListXML() {
+    return XMLCurrencyParser.getCurrencies();    
+    }
+    @GET
+    @Path("/allXMLMy")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Currency> getListXMLMy() {
+    return XMLCurrencyParser.getCurrenciesMy();    
     }
 		/*
 		 * -<Currency Id="170">
@@ -55,8 +67,13 @@ public class CurrencyService {
 			double ownRate=nbrbRateNum*1.05;//TODO
 			System.out.println(ownRate+" ");
 			return Response.status(200).entity(ownRate+" ").build();
-			 
-
+		}
+		@GET
+		@Path("/c/{charcode}")
+		public Response getCurrencyCharCode(@PathParam("charcode") String charcode) {
+			Currency cur=new Currency();
+			cur=XMLCurrencyParser.getCurrencyCharCode(charcode);
+			return Response.status(200).entity(cur).build();
 		}
         private String calc(String nbrbRate) {
             return new Double(Double.parseDouble(nbrbRate) * 1.05).toString(); // TODO

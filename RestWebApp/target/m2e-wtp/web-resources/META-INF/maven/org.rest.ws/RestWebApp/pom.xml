@@ -82,15 +82,15 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-    <groupId>com.sun.jersey</groupId>
-    <artifactId>jersey-json</artifactId>
-    <version>1.18.1</version>
-</dependency>
-<dependency>
-   <groupId>com.owlike</groupId>
-   <artifactId>genson</artifactId>
-   <version>0.99</version>
-</dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>1.18.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.owlike</groupId>
+			<artifactId>genson</artifactId>
+			<version>0.99</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<sourceDirectory>src</sourceDirectory>

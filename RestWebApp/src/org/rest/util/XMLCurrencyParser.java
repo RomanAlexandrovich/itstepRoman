@@ -23,6 +23,7 @@ public class XMLCurrencyParser
 		  public static final String SCALE = AppSettings.getInstance().getProperty("SCALE");
 		  public static final String CHARCODE = AppSettings.getInstance().getProperty("CHARCODE");
 		  public static final String RATE = AppSettings.getInstance().getProperty("RATE");
+		  public static final String STAVKA = AppSettings.getInstance().getProperty("STAVKA");
 //		  
 		  
 		  
@@ -106,38 +107,84 @@ public class XMLCurrencyParser
 		    }
 		    return "0.0";
 		  }
-		 public static List<Currency> getCurrencies() {
+		 public static Currency getCurrencyCharCode(String currencyCode)
+		  {
 			 NodeList nodes = doc.getFirstChild().getChildNodes();//загрузка п структуре документа XML 1Chaild-listCurrecn
-			 Currency cur = new Currency();
+			 Currency cur2 = new Currency();
 			 for (int i = 0; i < nodes.getLength(); i++) {
+				 Currency cur = new Currency();
 			        Node parent = nodes.item(i);
 			        if (parent.getNodeType() == Node.ELEMENT_NODE) {
 			          NodeList childs = parent.getChildNodes();
 			          
 			          for (int j = 0; j < childs.getLength(); j++) {
 			        	  Node child = childs.item(j);
-			        	  String Key=child.getNodeName().trim();
-			        	  
+			        	  		        	  
 			        	  if(child.hasChildNodes()) {
 
-			        		  if (child.getNodeName().trim().equalsIgnoreCase(NUMCODE)){ 
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(NUMCODE))
 			        		  cur.setNumCode(child.getFirstChild().getTextContent());
-			        		}
-			        		  if (child.getNodeName().trim().equalsIgnoreCase(CHARCODE)){ 
+			        		
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(CHARCODE))
 			        		  cur.setCharCode(child.getFirstChild().getTextContent());
-			        		 }
-			        		  if (child.getNodeName().trim().equalsIgnoreCase(SCALE)){ 
+			        		 
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(SCALE)) 
 			        		  cur.setScale(Integer.parseInt(child.getFirstChild().getTextContent()));
-			        		  }
-			        		  if (child.getNodeName().trim().equalsIgnoreCase(NAME)){ 
+			        		  
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(NAME)) 
 			        		  cur.setName(child.getFirstChild().getTextContent());
-			        		  }
-			        		  if (child.getNodeName().trim().equalsIgnoreCase(RATE)){ 
+			        		  
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(RATE)) 
 			        			  cur.setRate(Double.parseDouble(child.getFirstChild().getTextContent()));
-			        		  }
-			        		  }			        	  
-			        	  }
+			        		  
+			        		  }	
+			        	  	 }
 			          currencies.add(cur);
+			          for (Currency currency : currencies) {
+						if(currency.getCharCode().equals(currencyCode)) {
+							cur2=currency;
+						}
+					}
+			          
+			          }
+			        }
+			 
+			return cur2;
+			 
+		  }
+		 public static List<Currency> getCurrencies() {
+			 NodeList nodes = doc.getFirstChild().getChildNodes();//загрузка п структуре документа XML 1Chaild-listCurrecn
+			
+			 for (int i = 0; i < nodes.getLength(); i++) {
+				 Currency cur = new Currency();
+			        Node parent = nodes.item(i);
+			        if (parent.getNodeType() == Node.ELEMENT_NODE) {
+			          NodeList childs = parent.getChildNodes();
+			          
+			          for (int j = 0; j < childs.getLength(); j++) {
+			        	  Node child = childs.item(j);
+			        	  		        	  
+			        	  if(child.hasChildNodes()) {
+
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(NUMCODE))
+			        		  cur.setNumCode(child.getFirstChild().getTextContent());
+			        		
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(CHARCODE))
+			        		  cur.setCharCode(child.getFirstChild().getTextContent());
+			        		 
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(SCALE)) 
+			        		  cur.setScale(Integer.parseInt(child.getFirstChild().getTextContent()));
+			        		  
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(NAME)) 
+			        		  cur.setName(child.getFirstChild().getTextContent());
+			        		  
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(RATE)) 
+			        			  cur.setRate(Double.parseDouble(child.getFirstChild().getTextContent()));
+			        		  
+			        		  }	
+			        	  	 }
+			          currencies.add(cur);
+			          
 			          }
 			        }
 			 return currencies;
@@ -176,9 +223,48 @@ public class XMLCurrencyParser
 		    }
 		    return cur;
 		  }
+		 
+		 public static List<Currency> getCurrenciesMy() {
+			 NodeList nodes = doc.getFirstChild().getChildNodes();//загрузка п структуре документа XML 1Chaild-listCurrecn
+			
+			 for (int i = 0; i < nodes.getLength(); i++) {
+				 Currency cur = new Currency();
+			        Node parent = nodes.item(i);
+			        if (parent.getNodeType() == Node.ELEMENT_NODE) {
+			          NodeList childs = parent.getChildNodes();
+			          
+			          for (int j = 0; j < childs.getLength(); j++) {
+			        	  Node child = childs.item(j);
+			        	  		        	  
+			        	  if(child.hasChildNodes()) {
+
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(NUMCODE))
+			        		  cur.setNumCode(child.getFirstChild().getTextContent());
+			        		
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(CHARCODE))
+			        		  cur.setCharCode(child.getFirstChild().getTextContent());
+			        		 
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(SCALE)) 
+			        		  cur.setScale(Integer.parseInt(child.getFirstChild().getTextContent()));
+			        		  
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(NAME)) 
+			        		  cur.setName(child.getFirstChild().getTextContent());
+			        		  
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(RATE)) 
+			        			  cur.setRate((double)Double.parseDouble(child.getFirstChild().getTextContent())*Double.parseDouble(STAVKA));
+			        		  
+			        		  }	
+			        	  	 }
+			          currencies.add(cur);
+			          System.out.println(cur);
+			          
+			          }
+			        }
+			 return currencies;
+			 }
 public static void main(String[] args) {
 System.out.println(getCurrency("840"));
-getCurrencies();
+System.out.println(getCurrencyCharCode("SGD"));
 }
 	}
 
