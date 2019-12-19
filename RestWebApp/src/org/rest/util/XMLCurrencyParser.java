@@ -16,11 +16,22 @@ import org.xml.sax.SAXException;
 public class XMLCurrencyParser 
 
 	{
-		  public XMLCurrencyParser() {}
+		 
+		  public static final String CURRENCY_URL = AppSettings.getInstance().getProperty("URL_NBRB");
+		  public static final String NAME = AppSettings.getInstance().getProperty("NAME");
+		  public static final String NUMCODE = AppSettings.getInstance().getProperty("NUMCODE");
+		  public static final String SCALE = AppSettings.getInstance().getProperty("SCALE");
+		  public static final String CHARCODE = AppSettings.getInstance().getProperty("CHARCODE");
+		  public static final String RATE = AppSettings.getInstance().getProperty("RATE");
+//		  
 		  
-		  private static String CURRENCY_URL = "http://www.nbrb.by/Services/XmlExRates.aspx";
+		  
+		  
+		  
+//		  private static String CURRENCY_URL = "http://www.nbrb.by/Services/XmlExRates.aspx";
 		  private static List<Currency> currencies = new ArrayList<Currency>();
 		  private static Document doc=null;
+		  public XMLCurrencyParser() {}
 		  static {
 			  while (doc==null) {
 				  try {
@@ -80,7 +91,7 @@ public class XMLCurrencyParser
 		          for (int ii = 0; ii < childs.getLength(); ii++) {
 		            Node child = childs.item(ii);
 		            if (child.hasChildNodes()) {
-		              if ((child.getNodeName().trim().equalsIgnoreCase("Rate")) && (isCurrencyCodeNext)) {
+		              if ((child.getNodeName().trim().equalsIgnoreCase(RATE)) && (isCurrencyCodeNext)) {
 		                isCurrencyCodeNext = false;
 		                return child.getFirstChild().getTextContent();
 		              }
@@ -95,7 +106,7 @@ public class XMLCurrencyParser
 		    }
 		    return "0.0";
 		  }
-		 public static void getCurrencies() {
+		 public static List<Currency> getCurrencies() {
 			 NodeList nodes = doc.getFirstChild().getChildNodes();//загрузка п структуре документа XML 1Chaild-listCurrecn
 			 Currency cur = new Currency();
 			 for (int i = 0; i < nodes.getLength(); i++) {
@@ -105,31 +116,31 @@ public class XMLCurrencyParser
 			          
 			          for (int j = 0; j < childs.getLength(); j++) {
 			        	  Node child = childs.item(j);
+			        	  String Key=child.getNodeName().trim();
+			        	  
 			        	  if(child.hasChildNodes()) {
-			        		  if (child.getNodeName().trim().equalsIgnoreCase("NumCode")){ 
-			        		  cur.setNumCode(child.getNodeName());
-			        		  break;}
-			        		  if (child.getNodeName().trim().equalsIgnoreCase("CharCode")){ 
-			        		  cur.setCharCode(child.getNodeName());
-			        		  break;}
-			        		  if (child.getNodeName().trim().equalsIgnoreCase("Scale")){ 
-			        		  cur.setScale(Integer.parseInt(child.getNodeName()));
-			        		  break;}
-			        		  if (child.getNodeName().trim().equalsIgnoreCase("Name")){ 
-			        		  cur.setName(child.getNodeName());
-			        		  break;}
-			        		  if (child.getNodeName().trim().equalsIgnoreCase("Rate")){ 
-			        			  cur.setRate(Double.parseDouble(child.getNodeName()));
-			        			  break;
-			        		  }
 
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(NUMCODE)){ 
+			        		  cur.setNumCode(child.getFirstChild().getTextContent());
+			        		}
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(CHARCODE)){ 
+			        		  cur.setCharCode(child.getFirstChild().getTextContent());
+			        		 }
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(SCALE)){ 
+			        		  cur.setScale(Integer.parseInt(child.getFirstChild().getTextContent()));
 			        		  }
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(NAME)){ 
+			        		  cur.setName(child.getFirstChild().getTextContent());
+			        		  }
+			        		  if (child.getNodeName().trim().equalsIgnoreCase(RATE)){ 
+			        			  cur.setRate(Double.parseDouble(child.getFirstChild().getTextContent()));
+			        		  }
+			        		  }			        	  
 			        	  }
-			          System.out.println(cur);
-			        	  
-			        	  
+			          currencies.add(cur);
 			          }
 			        }
+			 return currencies;
 			 }
 			 
 		 

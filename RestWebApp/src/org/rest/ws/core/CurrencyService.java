@@ -30,6 +30,12 @@ public class CurrencyService {
         }
         return Response.status(200).entity(sb.toString()).build();
     }
+    @GET
+    @Path("/alls")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Currency> getList() {
+    return XMLCurrencyParser.getCurrencies();    
+    }
 		/*
 		 * -<Currency Id="170">
 		    <NumCode>036</NumCode>
