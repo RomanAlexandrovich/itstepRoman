@@ -10,8 +10,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.rest.util.StatusError;
 import org.rest.util.XMLCurrencyParser;
 import org.rest.ws.model.Currency;
+
+import com.sun.jersey.api.client.ClientResponse.Status;
 
 @Path("rates")
 public class CurrencyService {
@@ -73,6 +76,9 @@ public class CurrencyService {
 		public Response getCurrencyCharCode(@PathParam("charcode") String charcode) {
 			Currency cur=new Currency();
 			cur=XMLCurrencyParser.getCurrencyCharCode(charcode);
+			if(cur.getId()==0) {
+				return Response.status(Status.NOT_FOUND).entity(StatusError.CURRENCY_NOT_FOUND).build();
+			}
 			return Response.status(200).entity(cur).build();
 		}
         private String calc(String nbrbRate) {
