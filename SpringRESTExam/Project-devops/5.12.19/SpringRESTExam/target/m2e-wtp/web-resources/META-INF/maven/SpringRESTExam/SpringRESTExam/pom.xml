@@ -11,7 +11,7 @@
 
 <properties>
     <javax.servlet>3.0.1</javax.servlet>
-    <spring.version>3.2.6.RELEASE</spring.version>
+    <spring.version>5.3.18</spring.version>
 </properties>
 
 <dependencies>
